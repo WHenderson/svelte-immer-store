@@ -1,0 +1,63 @@
+{
+  "name": "project-lib-typescript",
+  "version": "0.0.0-dripip",
+  "repository": "git@github.com:jasonkuhrt/project-lib-typescript.git",
+  "author": "Jason Kuhrt",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "dist-esm"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist-esm/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "./dist-esm/index.js",
+  "scripts": {
+    "format": "prettier --write . && format-imports src && format-imports tests",
+    "format:imports:check": "format-imports --check src tests",
+    "format:prettier:check": "prettier --check .",
+    "format:check": "yarn -s format:imports:check && yarn -s format:prettier:check",
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "lint:check": "eslint . --ext .ts,.tsx --max-warnings 0",
+    "dev": "yarn -s clean && tsc --build --watch",
+    "build": "yarn -s clean && yarn build:cjs && yarn build:esm",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "test": "jest",
+    "clean": "rm -rf dist && rm -rf node_modules/.cache",
+    "release:pr": "dripip pr",
+    "release:canary": "dripip preview",
+    "release:stable": "dripip stable",
+    "prepublishOnly": "yarn -s build"
+  },
+  "devDependencies": {
+    "@homer0/prettier-plugin-jsdoc": "^3.0.1",
+    "@prisma-labs/prettier-config": "0.1.0",
+    "@types/jest": "26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "dripip": "0.10.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-only-warn": "^1.0.2",
+    "format-imports": "^2.3.3",
+    "jest": "26.6.3",
+    "jest-watch-typeahead": "0.6.2",
+    "prettier": "2.2.1",
+    "ts-jest": "26.5.4",
+    "ts-node": "^9.1.1",
+    "typescript": "4.2.4",
+    "typescript-snapshots-plugin": "^1.7.0"
+  },
+  "prettier": "@prisma-labs/prettier-config",
+  "importSorter": {
+    "emptyLinesBetweenGroups": false
+  },
+  "dependencies": {
+    "tslib": "^2.2.0"
+  }
+}
