@@ -1,7 +1,7 @@
 {
   "name": "immer-store",
   "version": "0.0.0-prerelease",
-  "repository": "git@github.com:jasonkuhrt/project-lib-typescript.git",
+  "repository": "git@github.com:WHenderson/immer-store.git",
   "author": "Will Henderson",
   "license": "MIT",
   "files": [
