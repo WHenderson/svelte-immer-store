@@ -105,3 +105,6 @@ dist
 
 # This library
 dist-esm
+
+# WebStorm
+.idea
