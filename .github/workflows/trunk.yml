@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
-        run: yarn --frozen-lockfile
-      - run: yarn -s build
-      - run: yarn -s test
+        run: pnpm install --frozen-lockfile
+      - run: pnpm run -s build
+      - run: pnpm run -s test
 
   # todo uncomment me
   #
