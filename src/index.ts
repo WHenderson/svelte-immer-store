@@ -9,4 +9,4 @@
  *   })
  *
  */
-export function foobar(): void {}
+export function foobar(): void { console.log('hmm'); }
