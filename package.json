@@ -1,8 +1,8 @@
 {
-  "name": "project-lib-typescript",
-  "version": "0.0.0-dripip",
+  "name": "immer-store",
+  "version": "0.0.0-prerelease",
   "repository": "git@github.com:jasonkuhrt/project-lib-typescript.git",
-  "author": "Jason Kuhrt",
+  "author": "Will Henderson",
   "license": "MIT",
   "files": [
     "dist",
