@@ -1,14 +1,22 @@
 # svelte-immer-store
 
-[![trunk](https://github.com/WHenderson/svelte-immer-store/actions/workflows/trunk.yml/badge.svg)](https://github.com/WHenderson/svelte-immer-store/actions/workflows/trunk.yml)
-
 [Svelte](https://svelte.dev/) compatible [store](https://svelte.dev/docs#svelte_store) using immutable [Immer](https://immerjs.github.io/immer/) objects 
+
+[![trunk](https://github.com/WHenderson/svelte-immer-store/actions/workflows/trunk.yml/badge.svg)](https://github.com/WHenderson/svelte-immer-store/actions/workflows/trunk.yml)
 
 :warning: This package release is a WIP. Not ready for use yet! 
 
 ## Installation
 
+> npm install svelte-immer-store
+
+OR
+
 > pnpm install svelte-immer-store
+
+OR
+
+> yarn install svelte-immer-store
 
 ## Usage
 
