@@ -1,7 +1,7 @@
 {
-  "name": "immer-store",
+  "name": "svelte-immer-store",
   "version": "0.0.0-dripip",
-  "repository": "git@github.com:WHenderson/immer-store.git",
+  "repository": "git@github.com:WHenderson/svelte-immer-store.git",
   "author": "Will Henderson",
   "license": "MIT",
   "files": [
