@@ -46,27 +46,6 @@ it('history', () => {
         });
     }
 
-    const mul = (x: number) => {
-        value *= x;
-
-        if (!Number.isSafeInteger(value) || !Number.isSafeInteger(x) || value === 0 || x === 0) {
-            history.enqueue({
-                redo() {
-                    value *= x;
-                }
-            });
-        }
-
-        history.enqueue({
-            undo() {
-                value += x;
-            },
-            redo() {
-                value *= x;
-            }
-        });
-    };
-
     add(2);
 
     expect(value).toEqual(1 + 2);
