@@ -47,7 +47,12 @@ export function createTrackerProxy<T>(
                     }
                 })();
 
-                return createTrackerProxy(result, <object><unknown>(value && typeof value === 'object' ? value : undefined), p);
+                // Note: p is never left as a string by the Proxy, so we have to assume that a string which looks like a number /is/ a number.
+                const prop = (typeof p === 'string' && Array.isArray(value) && /^(0|[1-9][0-9]*)$/.test(p))
+                    ? parseInt(p, 10)
+                    : p;
+
+                return createTrackerProxy(result, <object><unknown>(value && typeof value === 'object' ? value : undefined), prop);
             }
         }
     );
