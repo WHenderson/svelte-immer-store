@@ -59,6 +59,7 @@
     "emptyLinesBetweenGroups": false
   },
   "dependencies": {
+    "svelte": "^3.38.2",
     "tslib": "^2.2.0"
   }
 }
