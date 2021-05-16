@@ -2,7 +2,7 @@ import {StartStopNotifier, Subscriber, Unsubscriber, Updater, Writable} from "sv
 import {noop} from "svelte/internal";
 import {Change, EnqueueChange} from "./history";
 import {Action} from "./action";
-import produce, {applyPatches, nothing, Patch, produceWithPatches} from "immer";
+import produce, {applyPatches, enablePatches, nothing, Patch, produceWithPatches} from "immer";
 import {createPathProxy, PathProxy, symPath} from "./proxy/path";
 import {createTrackerProxy, symTrackerDetails, TrackerProxy} from "./proxy/tracker";
 
@@ -335,3 +335,5 @@ export function immerStore<T>(
         path: []
     }
 }
+
+enablePatches();

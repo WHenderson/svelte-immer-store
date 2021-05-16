@@ -24,6 +24,7 @@ export class History implements IHistory {
     public readonly count$: Readable<number>;
     public readonly canUndo$: Readable<boolean>;
     public readonly canRedo$: Readable<boolean>;
+    public readonly enqueue: (change: Change) => void;
 
     constructor() {
         this._state$ = writable({
@@ -39,9 +40,10 @@ export class History implements IHistory {
                     state.index !== 0
         );
         this.canRedo$ = derived(this._state$, state => state.index !== state.list.length);
+        this.enqueue = (change: Change): void => this._enqueue(change);
     }
 
-    enqueue(change: Change): void {
+    private _enqueue(change: Change): void {
         this._state$.update(h => {
             if (!change.undo) {
                 return {
