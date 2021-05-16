@@ -2,7 +2,7 @@ import {StartStopNotifier, Subscriber, Unsubscriber, Updater, Writable} from "sv
 import {noop} from "svelte/internal";
 import {Change, EnqueueChange} from "./history";
 import {Action} from "./action";
-import produce, {applyPatches, enablePatches, nothing, Patch, produceWithPatches} from "immer";
+import produce, {applyPatches, Draft, enablePatches, nothing, Patch, produceWithPatches} from "immer";
 import {createPathProxy, PathProxy, symPath} from "./proxy/path";
 import {createTrackerProxy, symTrackerDetails, TrackerProxy} from "./proxy/tracker";
 
@@ -68,20 +68,6 @@ export function immerStore<T>(
         })
     }
 
-    // record patch change
-    function recordPatch(redo: Patch[], undo: Patch[]) {
-        recordChange({
-            undo() {
-                const new_state = applyPatches(state, undo);
-                set(new_state);
-            },
-            redo() {
-                const new_state = applyPatches(state, redo);
-                set(new_state);
-            }
-        });
-    }
-
     // turn a selector into a path
     //function findPath(property: PropertyKey): PropertyKey[];
     //function findPath(path: PropertyKey[]): PropertyKey[];
@@ -135,22 +121,20 @@ export function immerStore<T>(
 
     // update state
     function update(fn: Updater<T>): void {
-        const [result, patches, inversePatches] = produceWithPatches(
+        const result = produce(
             state,
             draft => {
                 const result = fn(<T>draft);
 
                 return (result !== undefined)
-                    ? result
-                    : nothing;
+                    ? <Draft<T>>result
+                    : <Draft<T>><unknown>nothing;
             }
         );
 
         set(
-            <T>result,
-            (patches === undefined || inversePatches === undefined)
-                ? recordState
-                : () => recordPatch(patches, inversePatches)
+            result,
+            recordState
         );
     }
 
@@ -335,5 +319,3 @@ export function immerStore<T>(
         path: []
     }
 }
-
-enablePatches();
