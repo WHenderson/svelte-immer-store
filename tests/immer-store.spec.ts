@@ -134,7 +134,7 @@ it('complex types', () => {
 
     expect(history.canUndo).toBeFalsy();
 
-    expect(mockR.mock.calls[8][0].d[1].y).toStrictEqual(original);
+    expect(mockR.mock.calls[8][0]).toStrictEqual(original);
 
 
 });
