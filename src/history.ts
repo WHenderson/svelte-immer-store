@@ -1,6 +1,5 @@
 import {derived, get, Readable, writable, Writable} from "svelte/store";
-
-export type Action = () => void;
+import {Action} from "./action";
 
 export interface Change {
     undo?: Action;

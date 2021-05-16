@@ -11,6 +11,7 @@ specifiers:
   eslint-config-prettier: ^8.1.0
   eslint-plugin-only-warn: ^1.0.2
   format-imports: ^2.3.3
+  immer: ^9.0.2
   jest: 26.6.3
   jest-watch-typeahead: 0.6.2
   prettier: 2.2.1
@@ -23,6 +24,7 @@ specifiers:
   typescript-snapshots-plugin: ^1.7.0
 
 dependencies:
+  immer: 9.0.2
   svelte: 3.38.2
   tslib: 2.2.0
 
@@ -2473,6 +2475,10 @@ packages:
     resolution: {integrity: sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==}
     engines: {node: '>= 4'}
     dev: true
+
+  /immer/9.0.2:
+    resolution: {integrity: sha512-mkcmzLtIfSp40vAqteRr1MbWNSoI7JE+/PB36FNPoSfJ9RQRmNKuTYCjKkyXyuq3Dgn07HuJBrwJd4ZSk2yUbw==}
+    dev: false
 
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
