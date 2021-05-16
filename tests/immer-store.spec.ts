@@ -1,8 +1,7 @@
-import {immerStore} from "../src/immer-store";
 import {get} from "svelte/store";
 import * as util from "util";
 import {noop} from "svelte/internal";
-import {History} from "../src/history";
+import {History, immerStore} from "../src";
 
 it('primitive types', () => {
     const store = immerStore(1);
@@ -75,11 +74,10 @@ it('complex types', () => {
     const storeC = store.select(r => r.c);
     const storeY = store.select(r => r.d[1].y);
 
-    const unsubR = store.subscribe(mockR);
-    const unsubA = storeA.subscribe(mockA);
-    const unsubC = storeC.subscribe(mockC);
-    const unsubY = storeY.subscribe(mockY);
-
+    store.subscribe(mockR);
+    storeA.subscribe(mockA);
+    storeC.subscribe(mockC);
+    storeY.subscribe(mockY);
 
     storeY.set(11);
 
@@ -97,7 +95,7 @@ it('complex types', () => {
     expect(mockR.mock.calls[3][0].a).toEqual(original.a + 17);
     expect(mockR.mock.calls.length).toEqual(4);
 
-    store.update(r => ({
+    store.set({
         a: 19,
         b: 19,
         c: {
@@ -109,14 +107,12 @@ it('complex types', () => {
                 y: 19
             }
         ]
-    }));
+    });
 
     expect(mockR.mock.calls[4][0].a).toEqual(19);
     expect(mockR.mock.calls.length).toEqual(5);
 
     expect(history.count).toEqual(4);
-
-    store.subscribe(console.log);
 
     history.undo();
 
