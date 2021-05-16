@@ -9,8 +9,7 @@ export type PathProxy<T> = {
         : T
 );
 
-export function createPathProxy<T>(
-    value: T,
+export function createPathProxy<T = any>(
     path: PropertyKey[] = []
 ) : PathProxy<T> {
     return <PathProxy<T>><unknown>new Proxy(
@@ -20,22 +19,12 @@ export function createPathProxy<T>(
                 if (p === symPath)
                     return path;
 
-                const result = (() => {
-                    try {
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                        return <object>Reflect.get(<object><unknown>value, p, receiver);
-                    }
-                    catch (ex) {
-                        return;
-                    }
-                })();
-
                 // Note: p is never left as a string by the Proxy, so we have to assume that a string which looks like a number /is/ a number.
                 const prop = (typeof p === 'string' && /^(0|[1-9][0-9]*)$/.test(p))
                     ? parseInt(p, 10)
                     : p;
 
-                return createPathProxy(result, [...path, prop]);
+                return createPathProxy([...path, prop]);
             }
         }
     );
