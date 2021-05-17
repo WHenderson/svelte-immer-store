@@ -298,7 +298,7 @@ export function immerStore<T>(
             if (relative < 0 || relative > subPath.length)
                 throw new Error('invalid relative path');
 
-            return select<V>(subPath.slice(0, -relative).concat(propertyOrPathOrSelector));
+            return select<V>(subPath.slice(0, subPath.length - relative).concat(propertyOrPathOrSelector));
         }
 
         return {
