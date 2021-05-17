@@ -53,6 +53,16 @@ export function createTrackerProxy<T>(
                     : p;
 
                 return createTrackerProxy(result, <object><unknown>(value && typeof value === 'object' ? value : undefined), prop);
+            },
+            ownKeys(): ArrayLike<string | symbol> {
+                if (value && typeof value === 'object')
+                    return Reflect.ownKeys(<object><unknown>value);
+                return [];
+            },
+            getOwnPropertyDescriptor(target: {}, p: string | symbol): PropertyDescriptor | undefined {
+                if (value && typeof value === 'object')
+                    return Reflect.getOwnPropertyDescriptor(<object><unknown>value, p);
+                return;
             }
         }
     );
