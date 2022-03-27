@@ -9,11 +9,11 @@
     "dist-esm"
   ],
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "require": "./dist/index.js",
       "import": "./dist-esm/index.js"
-    },
-    "./package.json": "./package.json"
+    }
   },
   "main": "dist/index.js",
   "module": "./dist-esm/index.js",
