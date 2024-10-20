@@ -1,7 +1,8 @@
 import {get} from "svelte/store";
 import * as util from "util";
-import {noop} from "svelte/internal";
+// import {noop} from "svelte/internal";
 import {History, immerStore} from "../src";
+export const noop = () => { };
 
 it('primitive types', () => {
     const store = immerStore(1);
