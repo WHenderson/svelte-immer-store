@@ -1,10 +1,13 @@
 import {StartStopNotifier, Subscriber, Unsubscriber, Updater, Writable} from "svelte/store";
-import {noop} from "svelte/internal";
+// import {noop} from "svelte/internal";
 import {Change, EnqueueChange} from "./history";
 import {Action} from "./action";
 import produce, {applyPatches, Draft, enablePatches, nothing, Patch, produceWithPatches} from "immer";
 import {createPathProxy, PathProxy, symPath} from "./proxy/path";
 import {createTrackerProxy, symTrackerDetails, TrackerProxy} from "./proxy/tracker";
+
+export const noop = () => { };
+
 
 export interface BaseImmerStore<T> extends Writable<T> {
     select<D>(property: PropertyKey): SubImmerStore<D>;

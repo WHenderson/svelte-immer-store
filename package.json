@@ -1,5 +1,5 @@
 {
-  "name": "svelte-immer-store",
+  "name": "@yawnxyz/svelte-immer-store",
   "version": "0.0.0-dripip",
   "repository": "git@github.com:WHenderson/svelte-immer-store.git",
   "author": "Will Henderson",
