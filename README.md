@@ -101,8 +101,8 @@ see also [REPL](https://svelte.dev/repl/36bc342889c34e70857b012f58caaa67?version
 
 ```js
 import { immerStore, History } from 'svelte-immer-stor';
-import {noop} from "svelte/internal";
 
+const noop = () => {}
 const history = new History();
 const count = immerStore(0, noop, history.enqueue);
 

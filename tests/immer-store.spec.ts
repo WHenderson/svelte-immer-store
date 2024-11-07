@@ -1,8 +1,9 @@
 import {get} from "svelte/store";
 import * as util from "util";
-import {noop} from "svelte/internal";
 import {History, immerStore} from "../src";
 import { expect, test, vi } from 'vitest'
+
+const noop = () => {}
 
 test('primitive types', () => {
     const store = immerStore(1);

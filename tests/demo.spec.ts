@@ -1,6 +1,7 @@
 import {History, immerStore} from '../src';
-import {noop} from "svelte/internal";
 import { test } from 'vitest'
+
+const noop = () => {}
 
 test('primitive usage', () => {
     const count = immerStore(0);
