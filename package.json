@@ -30,7 +30,7 @@
     "build:esm": "tsc --project tsconfig.esm.json",
     "test": "vitest run --coverage",
     "test:watch": "vitest",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist && rimraf dist-esm",
     "release:pr": "dripip pr",
     "release:canary": "dripip preview",
     "release:stable": "dripip stable",
