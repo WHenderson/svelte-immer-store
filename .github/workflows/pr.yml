@@ -13,7 +13,7 @@ jobs:
           node-version: 14.x
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 6.3.0
+          version: 9.5.0
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - run: pnpm run -s format:imports:check
@@ -27,7 +27,7 @@ jobs:
           node-version: 14.x
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 6.3.0
+          version: 9.5.0
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - run: pnpm run -s format:check
@@ -41,7 +41,7 @@ jobs:
           node-version: 14.x
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 6.3.0
+          version: 9.5.0
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - run: pnpm run -s lint:check
