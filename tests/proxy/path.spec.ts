@@ -1,4 +1,5 @@
 import {createPathProxy, symPath} from "../../src/proxy/path";
+import { expect, test } from 'vitest'
 
 const root = {
     a: 1,
@@ -13,7 +14,7 @@ const root = {
     ]
 };
 
-it('track path', () => {
+test('track path', () => {
     expect(createPathProxy()[symPath]).toEqual([]);
     expect(createPathProxy().a[symPath]).toEqual(['a']);
     expect(createPathProxy().b[symPath]).toEqual(['b']);

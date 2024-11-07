@@ -2,8 +2,9 @@ import {get} from "svelte/store";
 import * as util from "util";
 import {noop} from "svelte/internal";
 import {History, immerStore} from "../src";
+import { expect, test, vi } from 'vitest'
 
-it('primitive types', () => {
+test('primitive types', () => {
     const store = immerStore(1);
 
     expect(get(store)).toEqual(1);
@@ -28,7 +29,7 @@ it('primitive types', () => {
     expect(() => subStore.delete()).toThrow('cannot delete value, invalid path');
 });
 
-it('complex types', () => {
+test('complex types', () => {
     const original = {
         a: 1,
         b: 2,
@@ -65,10 +66,10 @@ it('complex types', () => {
     expect(store.select(root => root.d[1]).select('y').path).toEqual(['d',1,'y']);
     expect(store.select(root => root.d[1]).select([0], 1).path).toEqual(['d',0]);
 
-    const mockR = jest.fn();
-    const mockA = jest.fn();
-    const mockC = jest.fn();
-    const mockY = jest.fn();
+    const mockR = vi.fn();
+    const mockA = vi.fn();
+    const mockC = vi.fn();
+    const mockY = vi.fn();
 
     const storeA = store.select(r => r.a);
     const storeC = store.select(r => r.c);
@@ -81,18 +82,18 @@ it('complex types', () => {
 
     storeY.set(11);
 
-    expect(mockR.mock.calls[1][0]).not.toStrictEqual(original);
-    expect(mockR.mock.calls[1][0].d[1].y).toEqual(11);
-    expect(mockY.mock.calls[1][0]).toEqual(11);
+    expect(mockR.mock.calls[1]![0]).not.toStrictEqual(original);
+    expect(mockR.mock.calls[1]![0].d[1].y).toEqual(11);
+    expect(mockY.mock.calls[1]![0]).toEqual(11);
 
     storeC.update(c => { c.x = 13; return c } );
 
-    expect(mockR.mock.calls[2][0].c.x).toEqual(13);
+    expect(mockR.mock.calls[2]![0].c.x).toEqual(13);
     expect(mockR.mock.calls.length).toEqual(3);
 
     storeA.update(a => a + 17);
 
-    expect(mockR.mock.calls[3][0].a).toEqual(original.a + 17);
+    expect(mockR.mock.calls[3]![0].a).toEqual(original.a + 17);
     expect(mockR.mock.calls.length).toEqual(4);
 
     store.set({
@@ -109,26 +110,26 @@ it('complex types', () => {
         ]
     });
 
-    expect(mockR.mock.calls[4][0].a).toEqual(19);
+    expect(mockR.mock.calls[4]![0].a).toEqual(19);
     expect(mockR.mock.calls.length).toEqual(5);
 
     expect(history.count).toEqual(4);
 
     history.undo();
 
-    expect(mockR.mock.calls[5][0].a).toEqual(18);
+    expect(mockR.mock.calls[5]![0].a).toEqual(18);
 
     history.undo();
 
-    expect(mockR.mock.calls[6][0].c.x).toEqual(13);
+    expect(mockR.mock.calls[6]![0].c.x).toEqual(13);
 
     history.undo();
 
-    expect(mockR.mock.calls[7][0].d[1].y).toEqual(11);
+    expect(mockR.mock.calls[7]![0].d[1].y).toEqual(11);
 
     history.undo();
 
     expect(history.canUndo).toBeFalsy();
 
-    expect(mockR.mock.calls[8][0]).toStrictEqual(original);
+    expect(mockR.mock.calls[8]![0]).toStrictEqual(original);
 });

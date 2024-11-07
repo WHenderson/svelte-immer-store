@@ -1,4 +1,5 @@
 import {createTrackerProxy, symTrackerDetails} from "../../src/proxy/tracker";
+import { expect, test } from 'vitest'
 
 const root = {
     a: 1,
@@ -17,7 +18,7 @@ const root = {
     ]
 };
 
-it('track values', () => {
+test('track values', () => {
     expect(createTrackerProxy(root)[symTrackerDetails].value).toEqual(root);
     expect(createTrackerProxy(root).a[symTrackerDetails].value).toEqual(root.a);
     expect(createTrackerProxy(root).b[symTrackerDetails].value).toEqual(root.b);
@@ -33,7 +34,7 @@ it('track values', () => {
     expect(createTrackerProxy(<any>root).e[symTrackerDetails].value).toBeUndefined();
 });
 
-it('track parent', () => {
+test('track parent', () => {
     expect(createTrackerProxy(root)[symTrackerDetails].parent).toBeUndefined();
     expect(createTrackerProxy(root).a[symTrackerDetails].parent).toEqual(root);
     expect(createTrackerProxy(root).b[symTrackerDetails].parent).toEqual(root);
@@ -49,7 +50,7 @@ it('track parent', () => {
     expect(createTrackerProxy(<any>root).e[symTrackerDetails].parent).toEqual(root);
 });
 
-it('track property', () => {
+test('track property', () => {
     expect(createTrackerProxy(root)[symTrackerDetails].property).toEqual(undefined);
     expect(createTrackerProxy(root).a[symTrackerDetails].property).toEqual('a');
     expect(createTrackerProxy(root).b[symTrackerDetails].property).toEqual('b');

@@ -1,7 +1,8 @@
 import {History} from "../src/history";
 import {get} from "svelte/store";
+import { expect, test } from 'vitest'
 
-it('history', () => {
+test('history', () => {
     const history = new History();
 
     expect(history.canUndo).toBeFalsy();

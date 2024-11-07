@@ -1,7 +1,8 @@
 import {History, immerStore} from '../src';
 import {noop} from "svelte/internal";
+import { test } from 'vitest'
 
-it('primitive usage', () => {
+test('primitive usage', () => {
     const count = immerStore(0);
 
     count.subscribe(value => {
@@ -13,7 +14,7 @@ it('primitive usage', () => {
     count.update(n => n + 1); // logs '2'
 });
 
-it('on-demand usage', () => {
+test('on-demand usage', () => {
     const count = immerStore(0, () => {
         console.log('got a subscriber');
         return () => console.log('no more subscribers');
@@ -28,7 +29,7 @@ it('on-demand usage', () => {
     unsubscribe(); // logs 'no more subscribers'
 });
 
-it('object', () => {
+test('object', () => {
     const root = immerStore({ count: 1, object: { value: 2 } });
 
     // Subscribe to any member of the object tree
@@ -48,7 +49,7 @@ it('object', () => {
     }); // logs '{ value: 3 }'
 });
 
-it('store history', () => {
+test('store history', () => {
     const history = new History();
     const count = immerStore(0, noop, history.enqueue);
 
@@ -68,7 +69,7 @@ it('store history', () => {
 });
 
 
-it.only('select', () => {
+test.only('select', () => {
     const root = immerStore({count: 1, object: {value: 2}});
 
     const count = root.select(root => root.count);
