@@ -70,7 +70,7 @@ test('store history', () => {
 });
 
 
-test.only('select', () => {
+test('select', () => {
     const root = immerStore({count: 1, object: {value: 2}});
 
     const count = root.select(root => root.count);
